@@ -9,7 +9,7 @@ import Account from "./pages/Account";
 
 const App = () => {
   return (
-    <Box bgColor='orange.500' minHeight='200vh' color='orange.50'>
+    <Box bgColor='orange.500' minHeight='100vh' color='orange.50'>
       <NavBar />
       <Routes>
         <Route index element={<Home />}/>
