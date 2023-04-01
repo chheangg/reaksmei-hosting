@@ -11,15 +11,13 @@ const App = () => {
   return (
     <Box bgColor='orange.500' minHeight='200vh' color='orange.50'>
       <NavBar />
-      <Box pt='12vh'>
-        <Routes>
-          <Route index element={<Home />}/>
-          <Route path='/solutions' element={<Solution />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/account' element={<Account />} />
-        </Routes>
-      </Box>
+      <Routes>
+        <Route index element={<Home />}/>
+        <Route path='/solutions' element={<Solution />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/account' element={<Account />} />
+      </Routes>
     </Box>
   );
 }

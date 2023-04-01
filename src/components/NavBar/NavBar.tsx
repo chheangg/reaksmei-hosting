@@ -136,7 +136,7 @@ const NavBar = () => {
   }
 
   return (
-    <Grid templateColumns='1fr 1fr' px='10vw' py='6' position='fixed' left='0' right='0'>
+    <Grid templateColumns='1fr 1fr' px='10vw' py='6' position='fixed' left='0' right='0' zIndex='1'>
       <Button
         aria-label="Home Button"
         variant='unstyled'

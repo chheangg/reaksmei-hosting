@@ -1,8 +1,12 @@
 import { Box } from "@chakra-ui/react"
+import HeroHeader from "../components/HeroHeader/HeroHeader";
 
 const Home = () => (
   <Box>
-    Homepage
+    <HeroHeader />
+    <Box
+      position='relative'
+    ></Box>
   </Box>
 )
 
