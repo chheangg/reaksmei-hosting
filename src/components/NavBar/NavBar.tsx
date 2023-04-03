@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react"
 import { 
   Image,
-  Box, 
   Grid,
   Button,
   Flex,
@@ -8,7 +8,7 @@ import {
   MenuButton, 
   MenuList,
   MenuItem} from "@chakra-ui/react"
-import { Link, To } from "react-router-dom"
+import { Link, useNavigate, To } from "react-router-dom"
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { BiServer } from 'react-icons/bi'
 import { GrServer } from 'react-icons/gr'
@@ -52,13 +52,13 @@ const buttonsInfo: NavButton[] = [
       {
         id: 3,
         text: 'Website Hosting',
-        to: '/solutions/webhosting',
+        to: '/solutions/web',
         icon: <MdOutlineWeb />
       },
       {
         id: 4,
         text: 'Game Hosting',
-        to: '/solutions/gamehosting',
+        to: '/solutions/game',
         icon: <FaGamepad />
       }
     ]
@@ -84,6 +84,22 @@ const buttonsInfo: NavButton[] = [
 ]
 
 const NavBar = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const buttonsInfoToComponent = (buttons: NavButton[]) => {
     return buttons.map(button => {
       if (!button.id || !button.text) {
@@ -111,21 +127,16 @@ const NavBar = () => {
             <MenuButton   
               flexDir='row'
               alignItems='center'
+              fontWeight='700' 
+              fontSize='xl' 
               >
-                <Button 
-                  variant='link' 
-                  color='orange.50'
-                  rightIcon={<RiArrowDownSLine />}
-                  fontWeight='medium' 
-                  fontSize='xl' 
-                  >
-                  {button.text.charAt(0).toUpperCase() + button.text.slice(1)}
-                </Button>
+                <Flex alignItems='center'>{button.text.charAt(0).toUpperCase() + button.text.slice(1)} <RiArrowDownSLine /></Flex>
               </MenuButton>
             <MenuList bgColor='orange.200' border='1px solid black'>
               {button.menuItem.map(item => (
-                <MenuItem bgColor='orange.200' color='blackAlpha.900' key={item.id} icon={item.icon} _hover={{bgColor: 'orange.300'}}>
-                  <Link to={item.to}>{item.text}</Link>
+                <MenuItem bgColor='orange.200' color='blackAlpha.900' key={item.id} icon={item.icon} _hover={{bgColor: 'orange.300'}}
+                  onClick={() => navigate(item.to)}>
+                  {item.text.charAt(0).toUpperCase() + item.text.slice(1)}
                 </MenuItem>
               ))}
             </MenuList>
@@ -136,7 +147,17 @@ const NavBar = () => {
   }
 
   return (
-    <Grid templateColumns='1fr 1fr' px='10vw' py='6' position='fixed' left='0' right='0' zIndex='1'>
+    <Grid 
+      bgColor={scrollPosition > 20 ? 'orange.500' : ''}
+      templateColumns='1fr 1fr'
+      px='10vw' 
+      py='6'
+      position='fixed' 
+      left='0' 
+      right='0' 
+      zIndex='1'
+      transition='2 00ms ease-in-out background-color'
+      >
       <Button
         aria-label="Home Button"
         variant='unstyled'

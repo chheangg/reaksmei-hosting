@@ -1,5 +1,6 @@
-import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
 import heroBg from '../../assets/hero-bg.png';
+import headerLogo from '../../assets/header-logo.png';
 
 const HeroHeader = () => (
   <Flex 
@@ -29,9 +30,13 @@ const HeroHeader = () => (
         variant='outline'
         color='orange.50'
         _hover={{
-          bgColor: 'yellow.300'
+          bgColor: 'yellow.300',
+          color: 'orange.500'
         }}
       >Browse Now</Button>
+    </Box>
+    <Box ml='20vw' height='100%'>
+      <Image h='75%' src={headerLogo} />
     </Box>
   </Flex>
 )

@@ -13,7 +13,12 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route index element={<Home />}/>
-        <Route path='/solutions' element={<Solution />} />
+        <Route path='/solutions'>
+          <Route path='vps' element={<Solution />} index/>
+          <Route path='dedicated' element={<Solution />} />
+          <Route path='web' element={<Solution />} />
+          <Route path='game' element={<Solution />} />
+        </Route>
         <Route path='/contact' element={<Contact />} />
         <Route path='/about' element={<About />} />
         <Route path='/account' element={<Account />} />
