@@ -14,7 +14,7 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   return (
-    <Box bgColor='orange.500' minHeight='100vh' color='orange.50'>
+    <Box bgColor='orange.500' minHeight='100vh' color='orange.50' pb='20vh'>
       <NavBar drawerRef={btnRef} openDrawer={onOpen} />
       <Routes>
         <Route index element={<Home />}/>

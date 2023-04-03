@@ -8,7 +8,7 @@ const ProductPanel = ({children} : { children: JSX.Element[] }) => (
     borderBottomLeftRadius='3xl'
     borderBottomRightRadius='3xl'
     px='2rem'
-    py='1rem'
+    py='2rem'
   >
     {children}
   </Box>
