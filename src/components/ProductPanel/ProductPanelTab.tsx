@@ -1,48 +1,17 @@
 import { Grid, Button } from "@chakra-ui/react"
-import { useLocation, useNavigate, To } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
-import { BiServer } from 'react-icons/bi'
-import { GrServer } from 'react-icons/gr'
-import { FaGamepad } from 'react-icons/fa'
-import { MdOutlineWeb } from 'react-icons/md'
+import { Tab } from "../../pages/Solution";
 
-interface Tabs {
-  id: number,
-  name: string,
-  icon: JSX.Element,
-  to: To,
+interface Props {
+  tabs: Tab[]
+  setSelectedTab: React.Dispatch<React.SetStateAction<Tab>>
 }
 
-const tabs: Tabs[] = [
-  {
-    id: 0,
-    name: 'Virtual Private Server',
-    to: './solutions/vps',
-    icon: <BiServer />
-  },
-  {
-    id: 1,
-    name: 'Dedicated Server',
-    to: './solutions/dedicated',
-    icon: <GrServer />
-  },
-  {
-    id: 2,
-    name: 'Web Hosting',
-    to: './solutions/web',
-    icon: <MdOutlineWeb />
-  },
-  {
-    id: 3,
-    name: 'Game Hosting',
-    to: './solutions/game',
-    icon: <FaGamepad />
-  }
-]
-
-const ProductPanelHeader = () => {
+const ProductPanelHeader = ({ tabs, setSelectedTab } : Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+  
   const selectedTab = () => {
     switch(String(location.pathname.split('/')[2])) {
       case 'vps':
@@ -72,7 +41,10 @@ const ProductPanelHeader = () => {
               color='gray.700'
               key={tab.id}
               leftIcon={tab.icon}
-              onClick={() => navigate(`/${tab.to}`)}
+              onClick={() => {
+                navigate(`/${tab.to}`);
+                setSelectedTab(tab);
+              }}
             >
               {tab.name}
             </Button>

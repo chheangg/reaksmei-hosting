@@ -7,13 +7,16 @@ import {
   Menu,
   MenuButton, 
   MenuList,
-  MenuItem} from "@chakra-ui/react"
+  IconButton,
+  MenuItem
+} from "@chakra-ui/react"
 import { Link, useNavigate, To } from "react-router-dom"
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { BiServer } from 'react-icons/bi'
 import { GrServer } from 'react-icons/gr'
 import { FaGamepad } from 'react-icons/fa'
 import { MdOutlineWeb } from 'react-icons/md'
+import { CiShoppingCart } from 'react-icons/ci';
 import logo from '../../assets/reaksmei.png';
 
 interface menuItem {
@@ -83,7 +86,12 @@ const buttonsInfo: NavButton[] = [
   }
 ]
 
-const NavBar = () => {
+interface Props {
+  drawerRef: React.RefObject<HTMLButtonElement>
+  openDrawer: () => void
+}
+
+const NavBar = ({ drawerRef, openDrawer }: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
 
@@ -166,10 +174,22 @@ const NavBar = () => {
           <Image h='100%' src={logo} alt=''/>
         </Link>
       </Button>
-      <Flex justifyContent='space-between'>
+      <Flex justifyContent='space-between' alignItems='center'>
         {
           buttonsInfoToComponent(buttonsInfo)
         }
+        <IconButton 
+          ref={drawerRef}
+          onClick={openDrawer}
+          aria-label='orders' 
+          icon={<CiShoppingCart size='32' />} 
+          bgColor='transparent' 
+          border='1px solid white' 
+          _hover={{
+            bgColor: 'yellow.300',
+            color: 'orange.500'
+          }}
+          />
       </Flex>
     </Grid>
   )
