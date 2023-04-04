@@ -113,7 +113,7 @@ const Solution = () => {
   }
 
   return (
-    <Box pt='12vh'>
+    <Box pt='12vh' mb='20vh'>
       <Box mx='10vw'>
         <ProductPanelHeader tabs={tabs} handleOnTap={handleOnSelectTab} selectedTab={selectedTab.id} />
         <ProductPanel>

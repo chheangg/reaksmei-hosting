@@ -9,12 +9,13 @@ import Solution from "./pages/Solution";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Account from "./pages/Account";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   return (
-    <Box bgColor='orange.500' minHeight='100vh' color='orange.50' pb='20vh'>
+    <Box bgColor='orange.500' minHeight='100vh' color='orange.50'>
       <NavBar drawerRef={btnRef} openDrawer={onOpen} />
       <Routes>
         <Route index element={<Home />}/>
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/account' element={<Account />} />
       </Routes>
+      <Footer />
       <Drawer
         isOpen={isOpen}
         placement="right"
