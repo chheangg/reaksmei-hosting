@@ -179,12 +179,12 @@ const NavBar = ({ drawerRef, openDrawer }: Props) => {
           buttonsInfoToComponent(buttonsInfo)
         }
         <IconButton 
+          variant='ghost'
           ref={drawerRef}
           onClick={openDrawer}
           aria-label='orders' 
           icon={<CiShoppingCart size='32' />} 
           bgColor='transparent' 
-          border='1px solid white' 
           _hover={{
             bgColor: 'yellow.300',
             color: 'orange.500'
