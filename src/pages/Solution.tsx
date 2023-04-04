@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Grid, Divider, Skeleton } from "@chakra-ui/react"
 import { useState } from "react";
 import { To } from "react-router-dom";
-import { OperationVariables, useQuery } from "@apollo/client";
+import { OperationVariables, useQuery, DocumentNode } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom"
 import { DEDICATED_PLANS, GAME_PLANS, VPS_PLANS, WEB_PLANS } from "../queries";
 
@@ -20,6 +20,7 @@ export interface Tab {
   id: number,
   name: string,
   icon: JSX.Element,
+  query: DocumentNode,
   to: To,
 }
 
@@ -28,33 +29,30 @@ const tabs: Tab[] = [
     id: 0,
     name: 'Virtual Private Server',
     to: './solutions/vps',
-    icon: <BiServer />
+    icon: <BiServer />,
+    query: VPS_PLANS
   },
   {
     id: 1,
     name: 'Dedicated Server',
     to: './solutions/dedicated',
-    icon: <GrServer />
+    icon: <GrServer />,
+    query: DEDICATED_PLANS
   },
   {
     id: 2,
     name: 'Web Hosting',
     to: './solutions/web',
-    icon: <MdOutlineWeb />
+    icon: <MdOutlineWeb />,
+    query: WEB_PLANS
   },
   {
     id: 3,
     name: 'Game Hosting',
     to: './solutions/game',
-    icon: <FaGamepad />
+    icon: <FaGamepad />,
+    query: GAME_PLANS
   }
-]
-
-const queries = [
-  VPS_PLANS,
-  DEDICATED_PLANS,
-  WEB_PLANS,
-  GAME_PLANS
 ]
 
 const returnPlans = (data: OperationVariables): JSX.Element => {
@@ -74,30 +72,24 @@ const returnPlans = (data: OperationVariables): JSX.Element => {
     return data.gamePlans.map((plan: Plan) => <ProductCard key={plan.id} plan={plan} />)
   }
 
-  throw new Error('Unknown Type detected')
+  throw new Error('Unknown type')
 }
 
-const getSelectedTab = (pathname: string) => {
-  switch(String(pathname.split('/')[2])) {
-    case 'vps':
-      return 0;
-    case 'dedicated':
-      return 1;
-    case 'web':
-      return 2;
-    case 'game':
-      return 3;
-    default:
-      throw new Error('Page not found');
+const getSelectedTab = (pathname: string): Tab => {
+  const tab = tabs.find(tab => tab.to === '.' + pathname);
+
+  if (tab) {
+    return tab;
   }
+
+  throw new Error('Unknown tab');
 }
 
 const Solution = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  const [selectedTab, setSelectedTab] = useState<Tab>(tabs[getSelectedTab(location.pathname)]);
-  const result = useQuery(queries[selectedTab.id]);
+  const [selectedTab, setSelectedTab] = useState<Tab>(getSelectedTab(location.pathname));
+  const result = useQuery(selectedTab.query);
 
   const handleOnSelectTab = (tab: Tab) => {
     navigate(`/${tab.to}`);
