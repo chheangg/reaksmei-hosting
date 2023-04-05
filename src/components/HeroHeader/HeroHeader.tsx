@@ -17,16 +17,28 @@ const HeroHeader = () => (
     borderBottomRightRadius='50% 5%'
     >
     <Box color='yellow.300'>
-      <Heading fontSize='72'>
+      <Heading fontSize={{
+        xl: '3rem',
+        '2xl': '4.5rem',
+      }}>
         The Kingdoms Host!
       </Heading>
-      <Text mt='2' fontSize='32' fontWeight='semibold' color='orange.400'>
+      <Text mt='2' fontSize={{
+        lg: '1rem',
+        xl: '2rem',
+      }} fontWeight='semibold' color='orange.400'>
         Affordable, Scalable, and Reliable services
       </Text>
       <Button
         mt='8'
-        fontSize='24'
-        size='lg'
+        fontSize={{
+          lg: '0.8rem',
+          xl: '1.5rem',
+        }}
+        p={{
+          lg: '0.5rem',
+          xl: '1.5rem'
+        }}
         variant='outline'
         color='orange.50'
         _hover={{

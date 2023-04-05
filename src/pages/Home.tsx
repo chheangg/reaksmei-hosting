@@ -1,13 +1,16 @@
 import { Box, Heading, Grid, Text } from "@chakra-ui/react"
 import FeatureCard from "../components/Home/FeatureCard";
 import HeroHeader from "../components/HeroHeader/HeroHeader";
+import angkorBg from '../assets/angkor-icon-bg.png';
 
 import { IoIosPricetags } from "react-icons/io";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import { FaShieldAlt } from "react-icons/fa";
-import { BiSupport } from 'react-icons/bi';
+import { FaShieldAlt, FaGamepad } from "react-icons/fa";
+import { VscServerEnvironment } from "react-icons/vsc";
+import { BiSupport, BiServer  } from 'react-icons/bi';
 import { GrStorage } from 'react-icons/gr';
-import { MdWebAsset } from 'react-icons/md'
+import { MdWebAsset, MdOutlineWeb } from 'react-icons/md'
+import FeaturedProductCard from "../components/FeaturedProductCard";
 
 const featureCards = [
   {
@@ -69,6 +72,44 @@ const Home = () => (
             <FeatureCard key={featureCard.id} {...featureCard} />
           )
         }
+      </Grid>
+    </Box>
+    <Box bgImage={angkorBg} color='gray.700' px='10vw' py='5vh' bgColor='yellow.300'>
+      <Heading textAlign='center'>On Sales</Heading>
+      <Text mt='0.5rem' textAlign='center' fontSize='lg'>Explore your plans today!</Text>
+      <Grid
+        mt='2rem'
+        templateRows='50vh'
+        templateColumns='1fr 1fr 1fr 1fr'
+      >
+        <FeaturedProductCard
+          icon={<BiServer size={84} />}
+          title='Virtual Private Server'
+          content='Performant, reliable and affordable VPS to accomodate your needs. With DDos protection and Ryzen 7 CPU, the sky is the limit!'
+          price={5}
+          to='/solutions/vps'
+        />
+        <FeaturedProductCard
+          icon={<VscServerEnvironment size={84} />}
+          title='Dedicated Server'
+          content='Powerful bare metal machines that are suitable for all sorts of cases. Runs on variety of CPU for your needs!'
+          price={50}
+          to='/solutions/dedicated'
+        />
+        <FeaturedProductCard
+          icon={<MdOutlineWeb size={84} />}
+          title='Website Hosting'
+          content='Instances of server tuned and optimized for hosting websites, with tens to hundreds of possible on just a plan!'
+          price={3}
+          to='/solutions/web'
+        />
+        <FeaturedProductCard
+          icon={<FaGamepad size={84} />}
+          title='Gameserver Hosting'
+          content='Suitable for a group of friends or even a community, experience lagless, low-latency, and secure performances!'
+          price={70}
+          to='/solutions/game'
+        />
       </Grid>
     </Box>
   </Box>

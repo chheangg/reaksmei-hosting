@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate, To } from "react-router-dom"
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { BiServer } from 'react-icons/bi'
-import { GrServer } from 'react-icons/gr'
+import { VscServerEnvironment } from "react-icons/vsc";
 import { FaGamepad } from 'react-icons/fa'
 import { MdOutlineWeb } from 'react-icons/md'
 import { CiShoppingCart } from 'react-icons/ci';
@@ -50,7 +50,7 @@ const buttonsInfo: NavButton[] = [
         id: 2,
         text: 'Dedicated Server',
         to: '/solutions/dedicated',
-        icon: <GrServer />
+        icon: <VscServerEnvironment />
       },
       {
         id: 3,

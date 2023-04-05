@@ -1,5 +1,5 @@
 import { Box, Heading, Text, Grid, Divider, Skeleton } from "@chakra-ui/react"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { To } from "react-router-dom";
 import { OperationVariables, useQuery, DocumentNode } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom"
@@ -93,8 +93,11 @@ const Solution = () => {
 
   const handleOnSelectTab = (tab: Tab) => {
     navigate(`/${tab.to}`);
-    setSelectedTab(tab);
   }
+
+  useEffect(() => {
+    setSelectedTab(getSelectedTab(location.pathname));
+  }, [location.pathname])
 
   if (result.loading) {
     return (
