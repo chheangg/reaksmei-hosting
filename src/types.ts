@@ -6,6 +6,7 @@ export interface Plan {
   cpu: string,
   ram: string,
   ssd: string,
+  ordered?: number,
   extra?: string[]
   price: number
 }

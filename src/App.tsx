@@ -1,8 +1,10 @@
 import { Box, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, DrawerFooter, Button, DrawerBody, Flex } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { Drawer, useDisclosure } from "@chakra-ui/react";
+import { Plan } from "./types";
 
+import { OrdersContext } from "./context/OrdersContext";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Solution from "./pages/Solution";
@@ -15,6 +17,7 @@ import Register from "./pages/Register";
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [ orders, setOrders ] = useState<Plan[]>([]); 
   const [ token, setToken ] = useState<string>('');
   const [ registrationSuccess, setRegistrationSuccess ] = useState<boolean>(false);
   const [ loginSuccess, setLoginSuccess ] = useState<boolean>(false);
@@ -38,22 +41,30 @@ const App = () => {
         token={token}
         setToken={setToken} 
       />
-      <Routes>
-        <Route index element={<Home />}/>
-        <Route path='/solutions'>
-          <Route path='vps' element={<Solution />} index/>
-          <Route path='dedicated' element={<Solution />} />
-          <Route path='web' element={<Solution />} />
-          <Route path='game' element={<Solution />} />
-        </Route>
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/account'>
-          <Route index element={<Account />} />
-          <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
-          <Route path='login' element={<Login setToken={setToken} setLoginSuccess={setLoginSuccess} />} />
-        </Route>
-      </Routes>
+      <OrdersContext.Provider value={{ orders, setOrders }}>
+        <Routes>
+          <Route index element={<Home />}/>
+          <Route path='/solutions'>
+            {['vps', 'dedicated', 'web', 'game'].map((route => 
+              <Route 
+                key={route} 
+                path={route} 
+                element={
+                  <Solution />
+                } 
+                index={route === 'vps'} 
+              />
+            ))}
+          </Route>
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/account'>
+            <Route index element={<Account />} />
+            <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
+            <Route path='login' element={<Login setToken={setToken} setLoginSuccess={setLoginSuccess} />} />
+          </Route>
+        </Routes>
+      </OrdersContext.Provider>
       <Footer />
       <Drawer
         isOpen={isOpen}
@@ -62,7 +73,7 @@ const App = () => {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent bgColor='orange.400' color='gray.50'>
+        <DrawerContent bgGradient='linear(to-br, gray.50, gray.200)' color='gray.700'>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth='1px'>Order Cart</DrawerHeader>
           <DrawerBody>
@@ -71,10 +82,10 @@ const App = () => {
             </Flex>
           </DrawerBody>
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
+            <Button variant='outline' borderColor='gray.700' mr={3} onClick={onClose} _hover={{ bgGradient: ''}}>
               Cancel
             </Button>
-            <Button bgColor='yellow.300' color='gray.700'>Checkout</Button>
+            <Button bgGradient='linear(to-br, orange.500, yellow.300)' color='gray.50' _hover={{ color: 'gray.700' }}>Checkout</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
