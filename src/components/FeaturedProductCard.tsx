@@ -18,8 +18,7 @@ const FeaturedProductCard = ({ first, last, icon, title, content, price, to } : 
     boxShadow='xl'
     transition='box-shadow 200ms ease-in-out'
     _hover={{
-      transform: "translateX(-5%) translateY(-20px)",
-      width: 'calc(100% + 10%)',
+      transform: "translateY(-20px) scale(1.1)",
       zIndex: 1,
       boxShadow: '2px 2px 10px 5px orange'
     }}
@@ -27,7 +26,9 @@ const FeaturedProductCard = ({ first, last, icon, title, content, price, to } : 
     <CardHeader pb='0'>
       <VStack>
         <Box color='orange.500'>{icon}</Box>
-        <Heading>{title}</Heading>
+        <Heading           
+        bgGradient='linear(to-l, orange.300, yellow.400)'
+          bgClip='text'>{title}</Heading>
       </VStack>
     </CardHeader>
     <CardBody pt='0.5rem'>
@@ -38,7 +39,15 @@ const FeaturedProductCard = ({ first, last, icon, title, content, price, to } : 
             <Text fontWeight='bold'>Starting from</Text>
             <Text color='orange.500' fontWeight='semibold'>${price.toFixed(2)}/month</Text>
           </Box>
-          <Button bgColor='orange.500' color='gray.50' as={ReachLink} to={to}>Browse now</Button>
+          <Button
+            bgGradient='linear(to-br, orange.400, yellow.400)' 
+            color='gray.50' 
+            as={ReachLink} 
+            to={to}
+            _hover={{
+              color: 'gray.700'
+            }}
+          >Browse now</Button>
         </Flex>
       </VStack>
     </CardBody>

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 
 const About = () => (
-  <Box>
+  <Box pt='12vh'>
     About page
   </Box>
 )

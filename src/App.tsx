@@ -10,12 +10,14 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Account from "./pages/Account";
 import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   return (
-    <Box bgColor='orange.500' minHeight='100vh' color='orange.50'>
+    <Box bgGradient='linear(to-b, orange.500, orange.300)' minHeight='100vh' color='orange.50'>
       <NavBar drawerRef={btnRef} openDrawer={onOpen} />
       <Routes>
         <Route index element={<Home />}/>
@@ -27,7 +29,11 @@ const App = () => {
         </Route>
         <Route path='/contact' element={<Contact />} />
         <Route path='/about' element={<About />} />
-        <Route path='/account' element={<Account />} />
+        <Route path='/account'>
+          <Route index element={<Account />} />
+          <Route path='register' element={<Register />} />
+          <Route path='login' element={<Login />} />
+        </Route>
       </Routes>
       <Footer />
       <Drawer

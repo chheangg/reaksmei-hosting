@@ -54,7 +54,7 @@ const featureCards = [
 const Home = () => (
   <Box>
     <HeroHeader />
-    <Box px='10vw' py='5vh'>
+    <Box px='10vw' py='5vh' bgGradient='linear(to-b, orange.500, yellow.400)'>
       <Heading fontSize='64' fontFamily='Bebas Neue' letterSpacing='1px'>
         WHY CHOOSE US?
       </Heading>
@@ -74,8 +74,14 @@ const Home = () => (
         }
       </Grid>
     </Box>
-    <Box bgImage={angkorBg} color='gray.700' px='10vw' py='5vh' bgColor='yellow.300'>
-      <Heading textAlign='center'>On Sales</Heading>
+    <Box bgImage={angkorBg} color='gray.700' px='10vw' py='5vh' bgGradient='linear(to-b, gray.50, gray.100)'>
+      <Heading 
+          bgGradient='linear(to-l, gray.900, gray.600)'
+          bgClip='text'
+        textAlign='center'
+        >
+          On Sales
+        </Heading>
       <Text mt='0.5rem' textAlign='center' fontSize='lg'>Explore your plans today!</Text>
       <Grid
         mt='2rem'
