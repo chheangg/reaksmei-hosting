@@ -7,6 +7,7 @@ import { Plan } from "../types";
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { useState, useContext, useEffect } from "react";
 
+import { TokenContext } from "../context/TokenContext";
 import { OrdersContext } from "../context/OrdersContext";
 
 interface Props {
@@ -14,28 +15,43 @@ interface Props {
 }
 
 const ProductCard = ({ plan } : Props) => {
+  const tokenObj = useContext(TokenContext);
   const { orders, setOrders } = useContext(OrdersContext);
   const [ordered, setOrdered] = useState<number>(0);
+  let orderExist: Plan | undefined;
+
+  if (orders) {
+    orderExist = orders.find(order => order.id === plan.id);
+  }
 
   useEffect(() => {
     if (orders) {
-      const orderExist = orders.find(order => order.id === plan.id);
       if (orderExist && orderExist.ordered) {
         setOrdered(orderExist.ordered);
-      }
+      } 
     }
   }, [])
 
-  useEffect(() => {
-    if (ordered > 0 && orders && setOrders) {
-      const orderExist = orders.find(order => order.id === plan.id);
-      if (orderExist) {
-        setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: ordered } : order));
-      } else {
-        setOrders([...orders, { ...plan, ordered: 1 }]);
-      }
+  const handleSetHandle = (ordered: number) => {
+    if (orderExist && setOrders && orders && (ordered === 0 || orderExist.ordered === 0)) {
+      setOrdered(0);
+      setOrders(orders.filter(order => order.id !== plan.id));
     }
-  }, [ordered])
+  }
+
+  useEffect(() => {
+    if (orders && setOrders) {
+      if (ordered > 0) {
+        if (orderExist) {
+          setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: ordered, setOrdered: handleSetHandle } : order));
+        } else {
+          setOrders([...orders, { ...plan, ordered: 1, setOrdered }]);
+        }
+      }
+
+    }
+
+  }, [ordered, orderExist?.ordered])
 
   if (!orders || !setOrders) {
     throw new Error("There has been an error: No Orders Context set")
@@ -77,7 +93,24 @@ const ProductCard = ({ plan } : Props) => {
             <IconButton variant='ghost' color='orange.400' aria-label="add one" icon={<AiOutlinePlus />} onClick={() => setOrdered(ordered + 1)}></IconButton>
           </Grid>
           :
-          <IconButton color='orange.400' variant='ghost' aria-label='Add to cart' onClick={() => setOrdered(ordered + 1)} icon={<CiShoppingCart size='32' />} />
+          <IconButton 
+            color='orange.400' 
+            variant='ghost' 
+            aria-label='Add to cart' 
+            onClick={() => {
+              if (tokenObj.token) {
+                setOrdered(ordered + 1)
+              } else {
+                if (tokenObj.setFailOrder) {
+                  tokenObj.setFailOrder(true);
+                  if (!tokenObj.failOrder) {
+                    setTimeout(() => (tokenObj && tokenObj.setFailOrder) ? tokenObj.setFailOrder(false) : null, 5000)
+                  }
+                }
+              }
+            }} 
+            icon={<CiShoppingCart 
+              size='32' />} />
         }
       </CardFooter>
     </Card> 

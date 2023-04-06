@@ -94,10 +94,11 @@ interface Props {
   token: string,
   setToken: React.Dispatch<React.SetStateAction<string>>,
   registrationSuccess: boolean,
-  loginSuccess: boolean
+  loginSuccess: boolean,
+  failOrder: boolean
 }
 
-const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, loginSuccess }: Props) => {
+const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, loginSuccess, failOrder }: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
 
@@ -188,6 +189,15 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, l
           <AlertIcon />
           <AlertTitle>Login successful!</AlertTitle>
           <AlertDescription>You may now place orders.</AlertDescription>
+        </Alert>
+        : null
+      }
+      {
+        failOrder ?
+        <Alert color='gray.700' status="error">
+          <AlertIcon />
+          <AlertTitle>Order failed!</AlertTitle>
+          <AlertDescription>Please login to place orders</AlertDescription>
         </Alert>
         : null
       }
