@@ -1,6 +1,6 @@
-import { Box, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, DrawerFooter, Button, DrawerBody, Flex, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Box, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, DrawerFooter, Button, DrawerBody, Flex } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Drawer, useDisclosure } from "@chakra-ui/react";
 
 import NavBar from "./components/NavBar/NavBar";
@@ -15,20 +15,29 @@ import Register from "./pages/Register";
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [ token, setToken ] = useState<string>('');
   const [ registrationSuccess, setRegistrationSuccess ] = useState<boolean>(false);
+  const [ loginSuccess, setLoginSuccess ] = useState<boolean>(false);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('host-site-token');
+
+    if (token) {
+      setToken(token);
+    }
+  }, []);
+
   return (
     <Box bgGradient='linear(to-b, orange.500, orange.300)' minHeight='100vh' color='orange.50'>
-      {
-        registrationSuccess ?
-          <Alert color='gray.700' status="success">
-            <AlertIcon />
-            <AlertTitle>Registration successful!</AlertTitle>
-            <AlertDescription>Please login to continue.</AlertDescription>
-          </Alert>
-        : null
-      }
-      <NavBar drawerRef={btnRef} openDrawer={onOpen} />
+      <NavBar 
+        registrationSuccess={registrationSuccess} 
+        loginSuccess={loginSuccess} 
+        drawerRef={btnRef} 
+        openDrawer={onOpen} 
+        token={token}
+        setToken={setToken} 
+      />
       <Routes>
         <Route index element={<Home />}/>
         <Route path='/solutions'>
@@ -42,7 +51,7 @@ const App = () => {
         <Route path='/account'>
           <Route index element={<Account />} />
           <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={<Login setToken={setToken} setLoginSuccess={setLoginSuccess} />} />
         </Route>
       </Routes>
       <Footer />

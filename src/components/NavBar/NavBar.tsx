@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { 
+  Box,
   Image,
   Grid,
   Button,
@@ -8,7 +9,8 @@ import {
   MenuButton, 
   MenuList,
   IconButton,
-  MenuItem
+  MenuItem,
+  Alert, AlertIcon, AlertTitle, AlertDescription 
 } from "@chakra-ui/react"
 import { Link, useNavigate, To } from "react-router-dom"
 import { RiArrowDownSLine } from 'react-icons/ri'
@@ -88,10 +90,14 @@ const buttonsInfo: NavButton[] = [
 
 interface Props {
   drawerRef: React.RefObject<HTMLButtonElement>
-  openDrawer: () => void
+  openDrawer: () => void,
+  token: string,
+  setToken: React.Dispatch<React.SetStateAction<string>>,
+  registrationSuccess: boolean,
+  loginSuccess: boolean
 }
 
-const NavBar = ({ drawerRef, openDrawer }: Props) => {
+const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, loginSuccess }: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
 
@@ -123,8 +129,14 @@ const NavBar = ({ drawerRef, openDrawer }: Props) => {
             color='orange.50' 
             bgColor={button.text === 'Account' ? 'yellow.400' : ''}
             p={button.text === 'Account' ? '1rem 2rem' : ''}
+            onClick={token && button.text === 'Account' ? () => {
+              setToken('')
+              window.localStorage.removeItem('host-site-token')
+            } : () => null}
             >
-             <Link to={button.to as To}>{button.text.charAt(0).toUpperCase() + button.text.slice(1)}</Link>
+             {!(token && button.text === 'Account') ? 
+              <Link to={button.to as To}>{button.text.charAt(0).toUpperCase() + button.text.slice(1)}</Link>
+              : 'Sign Out'}
           </Button>
         )
       } 
@@ -155,43 +167,64 @@ const NavBar = ({ drawerRef, openDrawer }: Props) => {
   }
 
   return (
-    <Grid 
-      bgColor={scrollPosition > 20 ? 'orange.500' : ''}
-      templateColumns='1fr 1fr'
-      px='10vw' 
-      py='6'
+    <Box          
       position='fixed' 
+      zIndex='1'
       left='0' 
       right='0' 
-      zIndex='1'
-      transition='2 00ms ease-in-out background-color'
-      >
-      <Button
-        aria-label="Home Button"
-        variant='unstyled'
-      >
-        <Link to='/'>
-          <Image h='100%' src={logo} alt=''/>
-        </Link>
-      </Button>
-      <Flex justifyContent='space-between' alignItems='center'>
-        {
-          buttonsInfoToComponent(buttonsInfo)
-        }
-        <IconButton 
-          variant='ghost'
-          ref={drawerRef}
-          onClick={openDrawer}
-          aria-label='orders' 
-          icon={<CiShoppingCart size='32' />} 
-          bgColor='transparent' 
-          _hover={{
-            bgColor: 'yellow.300',
-            color: 'orange.500'
-          }}
-          />
-      </Flex>
-    </Grid>
+    >
+      {
+        registrationSuccess ?
+          <Alert color='gray.700' status="success">
+            <AlertIcon />
+            <AlertTitle>Registration successful!</AlertTitle>
+            <AlertDescription>Please login to continue.</AlertDescription>
+          </Alert>
+        : null
+      }
+      {
+        loginSuccess ?
+        <Alert color='gray.700' status="success">
+          <AlertIcon />
+          <AlertTitle>Login successful!</AlertTitle>
+          <AlertDescription>You may now place orders.</AlertDescription>
+        </Alert>
+        : null
+      }
+        <Grid 
+          bgColor={scrollPosition > 20 ? 'orange.500' : ''}
+          templateColumns='1fr 1fr'
+          px='10vw' 
+          py='6'
+          transition='2 00ms ease-in-out background-color'
+        >
+        <Button
+          aria-label="Home Button"
+          variant='unstyled'
+        >
+          <Link to='/'>
+            <Image h='100%' src={logo} alt=''/>
+          </Link>
+        </Button>
+        <Flex justifyContent='space-between' alignItems='center'>
+          {
+            buttonsInfoToComponent(buttonsInfo)
+          }
+          <IconButton 
+            variant='ghost'
+            ref={drawerRef}
+            onClick={openDrawer}
+            aria-label='orders' 
+            icon={<CiShoppingCart size='32' />} 
+            bgColor='transparent' 
+            _hover={{
+              bgColor: 'yellow.300',
+              color: 'orange.500'
+            }}
+            />
+        </Flex>
+      </Grid>
+    </Box>
   )
 }
 
