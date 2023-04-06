@@ -1,4 +1,4 @@
-import { Box, Heading, Input, FormLabel, Flex, FormControl, Button } from "@chakra-ui/react"
+import { Box, Heading, Input, FormLabel, Flex, Button } from "@chakra-ui/react"
 
 const Login = () => (
   <Box pt='12vh' minHeight='85vh'>
