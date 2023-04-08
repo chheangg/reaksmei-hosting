@@ -19,6 +19,7 @@ import { VscServerEnvironment } from "react-icons/vsc";
 import { FaGamepad } from 'react-icons/fa'
 import { MdOutlineWeb } from 'react-icons/md'
 import { CiShoppingCart } from 'react-icons/ci';
+import { Plan } from "../../types"
 import logo from '../../assets/reaksmei.png';
 
 interface menuItem {
@@ -95,10 +96,11 @@ interface Props {
   setToken: React.Dispatch<React.SetStateAction<string>>,
   registrationSuccess: boolean,
   loginSuccess: boolean,
-  failOrder: boolean
+  failOrder: boolean,
+  setOrders: React.Dispatch<React.SetStateAction<Plan[]>>
 }
 
-const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, loginSuccess, failOrder }: Props) => {
+const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registrationSuccess, loginSuccess, failOrder }: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
 
@@ -133,6 +135,8 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, registrationSuccess, l
             onClick={token && button.text === 'Account' ? () => {
               setToken('')
               window.localStorage.removeItem('host-site-token')
+              setOrders([]);
+              navigate('/');
             } : () => null}
             >
              {!(token && button.text === 'Account') ? 

@@ -1,9 +1,9 @@
 import { createContext } from "react";
 import { Plan } from "../types";
 
-interface OrderContext {
+interface OrderContextObj {
   orders?: Plan[],
   setOrders?: React.Dispatch<React.SetStateAction<Plan[]>>
 }
 
-export const OrdersContext = createContext<OrderContext>({})
+export const OrdersContext = createContext<OrderContextObj>({})

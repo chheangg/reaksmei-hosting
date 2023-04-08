@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-interface OrderContext {
+export interface TokenContextObj {
   token: string,
   failOrder: boolean,
-  setFailOrder?: React.Dispatch<React.SetStateAction<boolean>>,
+  setFailOrder?: (tokenObj: TokenContextObj) => void,
 }
 
 
-export const TokenContext = createContext<OrderContext>({ token: '', failOrder: false });
+export const TokenContext = createContext<TokenContextObj>({ token: '', failOrder: false });

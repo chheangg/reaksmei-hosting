@@ -3,10 +3,10 @@ import {
     DrawerContent, DrawerHeader, 
     DrawerOverlay, DrawerFooter, 
     Button, DrawerBody, Flex, Accordion, 
-    Grid, IconButton,
+    Grid, IconButton, AccordionIcon,
     AccordionItem, AccordionButton, AccordionPanel } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Drawer, useDisclosure } from "@chakra-ui/react";
 import { Plan } from "./types";
 
@@ -15,12 +15,13 @@ import { BsMemory, BsDeviceSsd } from 'react-icons/bs';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
 import { OrdersContext } from "./context/OrdersContext";
-import { TokenContext } from "./context/TokenContext";
+import { TokenContext, TokenContextObj } from "./context/TokenContext";
 import NavBar from "./components/NavBar/NavBar";
+import Billing from "./pages/Billing";
 import Home from "./pages/Home";
 import Solution from "./pages/Solution";
 import Contact from "./pages/Contact";
-import About from "./pages/About";
+import Faq from "./pages/Faq";
 import Account from "./pages/Account";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
@@ -44,10 +45,20 @@ const App = () => {
     }
   }, []);
 
+  const handleFailOrder = (tokenObj: TokenContextObj) => {
+    if (tokenObj) {
+      setFailOrder(true);
+      if (!tokenObj.failOrder) {
+        setTimeout(() => (tokenObj && setFailOrder) ? setFailOrder(false) : null, 5000)
+      }
+    }
+  }
+
   return (
-    <TokenContext.Provider value={{ token, failOrder, setFailOrder }}>
+    <TokenContext.Provider value={{ token, failOrder, setFailOrder: handleFailOrder }}>
       <Box bgGradient='linear(to-b, orange.500, orange.300)' minHeight='100vh' color='orange.50'>
         <NavBar 
+          setOrders={setOrders}
           failOrder={failOrder}
           registrationSuccess={registrationSuccess} 
           loginSuccess={loginSuccess} 
@@ -72,7 +83,8 @@ const App = () => {
               ))}
             </Route>
             <Route path='/contact' element={<Contact />} />
-            <Route path='/about' element={<About />} />
+            <Route path='/faq' element={<Faq />} />
+            <Route path='/billing' element={<Billing />} />
             <Route path='/account'>
               <Route index element={<Account />} />
               <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
@@ -100,10 +112,11 @@ const App = () => {
                     orders.map(order => {
                       return (
                         <AccordionItem display='flex' flexDir='column' key={order.id}>
-                          <AccordionButton borderLeft='10px solid' borderColor={`${order.color}`} height='4rem'>
+                          <AccordionButton borderLeft='10px solid' borderColor={`${order.color}`} height='4rem' justifyContent='space-between'>
                             <Text fontWeight='semibold'>
                               {order.name}
                             </Text>
+                            <AccordionIcon />
                           </AccordionButton>
                           <AccordionPanel>
                             <Flex gap='0.5rem' alignItems='center'><FiCpu size='20' /> <Text fontWeight='semibold'>{order.cpu}</Text></Flex>

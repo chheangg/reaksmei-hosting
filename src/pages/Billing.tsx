@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react"
 
-const About = () => (
+const Billing = () => (
   <Box pt='12vh'>
-    About page
+    Billing page
   </Box>
 )
 
-export default About;
+export default Billing;

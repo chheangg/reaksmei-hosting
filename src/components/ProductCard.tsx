@@ -20,6 +20,12 @@ const ProductCard = ({ plan } : Props) => {
   const [ordered, setOrdered] = useState<number>(0);
   let orderExist: Plan | undefined;
 
+  const modifyOrders = () => {
+    if (orders && setOrders) {
+      setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: ordered, setOrdered: handleSetHandle } : order));
+    }
+  }
+
   if (orders) {
     orderExist = orders.find(order => order.id === plan.id);
   }
@@ -33,9 +39,15 @@ const ProductCard = ({ plan } : Props) => {
   }, [])
 
   const handleSetHandle = (ordered: number) => {
-    if (orderExist && setOrders && orders && (ordered === 0 || orderExist.ordered === 0)) {
-      setOrdered(0);
-      setOrders(orders.filter(order => order.id !== plan.id));
+    if (orderExist && setOrders && orders) {
+      if (ordered === 0 || orderExist.ordered === 0) {
+        setOrdered(0);
+        setOrders(orders.filter(order => order.id !== plan.id));
+      } else {
+        setOrdered(ordered);
+        modifyOrders();
+      }
+
     }
   }
 
@@ -43,9 +55,9 @@ const ProductCard = ({ plan } : Props) => {
     if (orders && setOrders) {
       if (ordered > 0) {
         if (orderExist) {
-          setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: ordered, setOrdered: handleSetHandle } : order));
+          modifyOrders();
         } else {
-          setOrders([...orders, { ...plan, ordered: 1, setOrdered }]);
+          setOrders([...orders, { ...plan, ordered: 1, setOrdered: setOrdered }]);
         }
       }
 
@@ -102,10 +114,7 @@ const ProductCard = ({ plan } : Props) => {
                 setOrdered(ordered + 1)
               } else {
                 if (tokenObj.setFailOrder) {
-                  tokenObj.setFailOrder(true);
-                  if (!tokenObj.failOrder) {
-                    setTimeout(() => (tokenObj && tokenObj.setFailOrder) ? tokenObj.setFailOrder(false) : null, 5000)
-                  }
+                  tokenObj.setFailOrder(tokenObj);
                 }
               }
             }} 

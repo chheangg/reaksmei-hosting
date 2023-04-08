@@ -12,7 +12,7 @@ interface Props {
   to: To,
 }
 
-const FeaturedProductCard = ({ first, last, icon, title, content, price, to } : Props) => (
+const FeaturedProductCard = ({ icon, title, content, price, to } : Props) => (
   <Card 
     p='1.5rem'
     boxShadow='xl'
