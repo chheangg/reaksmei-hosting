@@ -77,8 +77,8 @@ const buttonsInfo: NavButton[] = [
   },
   {
     id: 3,
-    text: 'about',
-    to: '/about',
+    text: 'faq',
+    to: '/faq',
     interactivity: false,
   },
   {
@@ -183,7 +183,7 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
           <Alert color='gray.700' status="success">
             <AlertIcon />
             <AlertTitle>Registration successful!</AlertTitle>
-            <AlertDescription>Please login to continue.</AlertDescription>
+            <AlertDescription>{token ? 'You must place an order on an item' : 'Please login to continue'}</AlertDescription>
           </Alert>
         : null
       }

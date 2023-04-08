@@ -20,9 +20,9 @@ const ProductCard = ({ plan } : Props) => {
   const [ordered, setOrdered] = useState<number>(0);
   let orderExist: Plan | undefined;
 
-  const modifyOrders = () => {
+  const modifyOrders = (numOfOrders: number) => {
     if (orders && setOrders) {
-      setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: ordered, setOrdered: handleSetHandle } : order));
+      setOrders(orders.map(order => (order.id === plan.id) ? {...order, ordered: numOfOrders, setOrdered: handleSetHandle } : order));
     }
   }
 
@@ -45,9 +45,8 @@ const ProductCard = ({ plan } : Props) => {
         setOrders(orders.filter(order => order.id !== plan.id));
       } else {
         setOrdered(ordered);
-        modifyOrders();
+        modifyOrders(ordered);
       }
-
     }
   }
 
@@ -55,7 +54,7 @@ const ProductCard = ({ plan } : Props) => {
     if (orders && setOrders) {
       if (ordered > 0) {
         if (orderExist) {
-          modifyOrders();
+          modifyOrders(ordered);
         } else {
           setOrders([...orders, { ...plan, ordered: 1, setOrdered: setOrdered }]);
         }

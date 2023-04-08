@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 
 const Faq = () => (
   <Box pt='12vh'>
-    Faq page
+    <Heading>Commonly Asked Questions</Heading>
   </Box>
 )
 

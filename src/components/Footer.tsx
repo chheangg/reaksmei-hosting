@@ -31,7 +31,7 @@ const Footer = () => (
           <Divider mt='0.5rem' mb='1rem' border='2px solid' borderColor='orange.300'/>
           <VStack alignItems='start'>
             <FooterListElement text={'Contact'} to='/contact' />
-            <FooterListElement text={'About'} to='/about' />
+            <FooterListElement text={'Faq'} to='/faq' />
             <FooterListElement text={'Account'} to='/account' />
           </VStack>
         </Box>

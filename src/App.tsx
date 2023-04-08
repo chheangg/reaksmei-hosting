@@ -5,7 +5,7 @@ import {
     Button, DrawerBody, Flex, Accordion, 
     Grid, IconButton, AccordionIcon,
     AccordionItem, AccordionButton, AccordionPanel } from "@chakra-ui/react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { Drawer, useDisclosure } from "@chakra-ui/react";
 import { Plan } from "./types";
@@ -35,6 +35,7 @@ const App = () => {
   const [ failOrder, setFailOrder ] = useState<boolean>(false);
   const [ registrationSuccess, setRegistrationSuccess ] = useState<boolean>(false);
   const [ loginSuccess, setLoginSuccess ] = useState<boolean>(false);
+  const navigate = useNavigate();
   const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -84,7 +85,7 @@ const App = () => {
             </Route>
             <Route path='/contact' element={<Contact />} />
             <Route path='/faq' element={<Faq />} />
-            <Route path='/billing' element={<Billing />} />
+            <Route path='/billing' element={<Billing orders={orders} setOrders={setOrders} setFailOrder={handleFailOrder} />} />
             <Route path='/account'>
               <Route index element={<Account />} />
               <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
@@ -157,7 +158,23 @@ const App = () => {
               <Button variant='outline' borderColor='gray.700' mr={3} onClick={onClose} _hover={{ bgGradient: ''}}>
                 Cancel
               </Button>
-              <Button bgGradient='linear(to-br, orange.500, yellow.300)' color='gray.50' _hover={{ color: 'gray.700' }}>Checkout</Button>
+              <Button 
+                bgGradient='linear(to-br, orange.500, yellow.300)' 
+                color='gray.50' 
+                onClick={
+                  token || orders.length > 0  ?
+                    () => {
+                      onClose();
+                      navigate('/billing')
+                    }
+                    : 
+                    () => handleFailOrder({ token, failOrder, setFailOrder: handleFailOrder }
+                  )
+                }
+                _hover={{ color: 'gray.700' }}
+              >
+                Checkout
+              </Button>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
