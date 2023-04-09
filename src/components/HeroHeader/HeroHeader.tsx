@@ -12,7 +12,7 @@ const HeroHeader = () => (
       }}
       gap='1rem'
       pt={{
-        base: '5vh',
+        base: '8vh',
         lg: '12vh'
       }}
       h='52vh'
