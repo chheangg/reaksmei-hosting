@@ -11,3 +11,9 @@ export interface Plan {
   extra?: string[]
   price: number
 }
+
+export interface Qna {
+  id: number,
+  question: string,
+  answer: string,
+}

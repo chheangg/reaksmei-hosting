@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 
 const Contact = () => (
-  <Box pt='12vh'>
-    Contact page
+  <Box minH='80vh' pt='12vh' px='10vw'>
+    <Heading>Contact</Heading>
   </Box>
 )
 

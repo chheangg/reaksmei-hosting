@@ -1,11 +1,19 @@
-import { Box, Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, Image, Grid } from "@chakra-ui/react";
 import heroBg from '../../assets/hero-bg.png';
 import headerLogo from '../../assets/header-logo.png';
 
 const HeroHeader = () => (
   <Box bgColor='orange.500'>
-      <Flex 
-      pt='12vh'
+      <Grid
+      templateColumns={{
+        base: '1fr auto',
+        lg: '1fr 1fr'
+      }}
+      gap='1rem'
+      pt={{
+        base: '5vh',
+        lg: '12vh'
+      }}
       h='52vh'
       alignItems='center' 
       bgImage={heroBg} 
@@ -22,10 +30,10 @@ const HeroHeader = () => (
         <Heading 
           bgGradient='linear(to-l, yellow.300, orange.300)'
           bgClip='text'
-          fontSize={{
-            xl: '3rem',
-            '2xl': '4.5rem',
-        }}>
+            fontSize={{
+              base: '2.5rem',
+              lg: "4.5rem"
+            }}>
           The Kingdoms Host!
         </Heading>
         <Text 
@@ -33,20 +41,23 @@ const HeroHeader = () => (
           bgClip='text'
           mt='2' 
           fontSize={{
-            lg: '1rem',
-            xl: '2rem',
-        }} fontWeight='semibold' color='orange.400'>
+            base: '0.8rem',
+            lg: "2rem"
+          }} fontWeight='semibold' color='orange.400'>
           Affordable, Scalable, and Reliable services
         </Text>
         <Button
-          mt='8'
-          fontSize={{
-            lg: '0.8rem',
-            xl: '1.5rem',
+          mt={{
+            base: '6',
+            lg: '8'
           }}
-          p={{
-            lg: '0.5rem',
-            xl: '1.5rem'
+          fontSize={{
+            base: '1.2rem',
+            lg: '1.5rem'
+          }}
+          padding={{
+            base: '1rem',
+            lg: '2rem'
           }}
           variant='outline'
           color='orange.50'
@@ -56,10 +67,10 @@ const HeroHeader = () => (
           }}
         >Browse Now</Button>
       </Box>
-      <Box ml='20vw' height='100%'>
-        <Image h='75%' src={headerLogo} />
+      <Box display='flex' alignItems='center' mb='5%' ml={{ base: '0', lg: '20vw'}} height='100%'>
+        <Image h={{ base: '30%', lg: '75%' }}  src={headerLogo} />
       </Box>
-    </Flex>
+    </Grid>
   </Box>
 )
 

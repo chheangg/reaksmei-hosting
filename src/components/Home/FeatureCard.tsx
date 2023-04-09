@@ -12,9 +12,9 @@ const FeatureCard = ({ icon, title, content }: FeatureCardProps) => (
       {icon}
     </Box>
     <CardHeader mt='1rem' py='0'>
-      <Heading size='md'>{title}</Heading>
+      <Heading fontSize={{ base: '1rem', lg: '1.25rem' }}>{title}</Heading>
     </CardHeader>
-    <CardBody mt='0.5rem' py='0' fontSize='18'>
+    <CardBody mt='0.5rem' py='0' fontSize={{ base: '0.8rem', lg: '1.15rem' }}>
       {content}
     </CardBody>
   </Card>

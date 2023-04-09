@@ -55,17 +55,17 @@ const Home = () => (
   <Box>
     <HeroHeader />
     <Box px='10vw' py='5vh' bgGradient='linear(to-b, orange.500, yellow.400)'>
-      <Heading fontSize='64' fontFamily='Bebas Neue' letterSpacing='1px'>
+      <Heading fontSize={{ base: '2rem', lg: '4rem' }} fontFamily='Bebas Neue' letterSpacing='1px'>
         WHY CHOOSE US?
       </Heading>
-      <Text fontSize='24'>
+      <Text fontSize={{ base: '1rem', lg: '1.5rem' }}>
         Here are some reasons why!
       </Text>
       <Grid 
         mt='2rem'
-        templateRows='250px 250px'
-        templateColumns='1fr 1fr 1fr'
-        gap='2rem'
+        autoRows={{ base: 'auto', lg: '250px'}}
+        templateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr'}}
+        gap={{ base: '0.5rem', lg: '2rem'}}
       >
         {
           featureCards.map(featureCard => 
@@ -85,20 +85,21 @@ const Home = () => (
       <Text mt='0.5rem' textAlign='center' fontSize='lg'>Explore your plans today!</Text>
       <Grid
         mt='2rem'
-        templateRows='50vh'
-        templateColumns='1fr 1fr 1fr 1fr'
+        templateRows='auto'
+        templateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr'}}
+        gap='0.5rem'
       >
         <FeaturedProductCard
           icon={<BiServer size={84} />}
           title='Virtual Private Server'
-          content='Performant, reliable and affordable VPS to accomodate your needs. With DDos protection and Ryzen 7 CPU, the sky is the limit!'
+          content='Performant, reliable and affordable VPSes to accomodate your needs. With DDos protection and Ryzen 7 CPU, the sky is only the limit!'
           price={5}
           to='/solutions/vps'
         />
         <FeaturedProductCard
           icon={<VscServerEnvironment size={84} />}
           title='Dedicated Server'
-          content='Powerful bare metal machines that are suitable for all sorts of cases. Runs on variety of CPU for your needs!'
+          content='Powerful bare metal machines that are suitable for all sorts of cases with backups. Best for Small-Medium Enterprises and heavy uses!'
           price={50}
           to='/solutions/dedicated'
         />
