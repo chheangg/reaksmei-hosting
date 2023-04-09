@@ -85,6 +85,12 @@ const buttonsInfo: NavButton[] = [
   },
   {
     id: 4,
+    text: 'about',
+    to: '/About',
+    interactivity: false,
+  },
+  {
+    id: 5,
     text: 'Account',
     to: '/account',
     interactivity: false,

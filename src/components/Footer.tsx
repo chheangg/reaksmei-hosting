@@ -32,6 +32,7 @@ const Footer = () => (
           <VStack alignItems='start'>
             <FooterListElement text={'Contact'} to='/contact' />
             <FooterListElement text={'Faq'} to='/faq' />
+            <FooterListElement text={'About'} to='/about' />
             <FooterListElement text={'Account'} to='/account' />
           </VStack>
         </Box>

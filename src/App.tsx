@@ -27,6 +27,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Error from "./pages/Error";
+import About from "./pages/About";
 
 
 const App = () => {
@@ -86,6 +87,7 @@ const App = () => {
             </Route>
             <Route path='/contact' element={<Contact />} />
             <Route path='/faq' element={<Faq />} />
+            <Route path='/about' element={<About />} />
             <Route path='/billing' element={<Billing orders={orders} setOrders={setOrders} setFailOrder={handleFailOrder} />} />
             <Route path='/account'>
               <Route index element={<Account />} />
