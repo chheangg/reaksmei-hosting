@@ -87,7 +87,7 @@ const Home = () => (
         mt='2rem'
         templateRows='auto'
         templateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr'}}
-        gap='0.5rem'
+        gap={{ base: '0.5rem', lg: '0' }}
       >
         <FeaturedProductCard
           icon={<BiServer size={84} />}
