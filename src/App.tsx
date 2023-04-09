@@ -26,6 +26,7 @@ import Account from "./pages/Account";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Error from "./pages/Error";
 
 
 const App = () => {
@@ -91,6 +92,7 @@ const App = () => {
               <Route path='register' element={<Register setRegistrationSuccess={setRegistrationSuccess} />} />
               <Route path='login' element={<Login setToken={setToken} setLoginSuccess={setLoginSuccess} />} />
             </Route>
+            <Route path='*' element={<Error />}/>
           </Routes>
         </OrdersContext.Provider>
         <Footer />

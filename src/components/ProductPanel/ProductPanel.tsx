@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react"
 
 const ProductPanel = ({children} : { children: JSX.Element[] }) => (
   <Box 
+    borderTop='0'
     color='gray.700'
     bgColor='gray.50'
     minHeight='75vh'

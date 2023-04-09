@@ -30,8 +30,8 @@ const qnas: Qna[] = [
 ]
 
 const Faq = () => (
-  <Box minH='80vh' pt='12vh' px='10vw'>
-    <Heading>Commonly Asked Questions</Heading>
+  <Box minH='80vh' py='12vh' px='10vw'>
+    <Heading fontSize={{ base: '2.5rem', lg: '48' }}>Commonly Asked Questions</Heading>
     <Accordion mt='2rem' allowMultiple>
       {
         qnas.map(qna => 

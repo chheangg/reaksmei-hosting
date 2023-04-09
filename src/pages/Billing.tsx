@@ -28,7 +28,7 @@ const Billing = ({ orders, setOrders, setFailOrder }: Prop) => {
   
   return (
     <Box minH='80vh' pt='12vh' pb='10vh' px='10vw'>
-      <Heading fontSize='5xl'>Billings</Heading>
+      <Heading fontSize={{ base: '2.5rem', lg: '72' }}>Billings</Heading>
       <TableContainer mt='5vh' bgColor='gray.50' borderRadius='xl'>
         <Table variant="simple">
           <Thead>
@@ -67,8 +67,8 @@ const Billing = ({ orders, setOrders, setFailOrder }: Prop) => {
           </Tfoot>
         </Table>
       </TableContainer>
-      <Heading mt='2rem' fontSize='5xl'>Payment Options</Heading>
-      <Grid mt='1rem' templateColumns='1fr 1fr 1fr' autoRows='20vh' gap='1.5rem' color='gray.700' textAlign='center' fontWeight='semibold'>
+      <Heading mt='2rem' fontSize={{ base: '2.5rem', lg: '72' }}>Payment Options</Heading>
+      <Grid mt='1rem' templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }} autoRows='20vh' gap='1.5rem' color='gray.700' textAlign='center' fontWeight='semibold'>
         <Box 
           onClick={() => {setPaymentOption(1)}} 
           p='1rem' 

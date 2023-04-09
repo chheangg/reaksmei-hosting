@@ -185,9 +185,9 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
 
   return (
     <Box
+      bg='transparent'
       position='fixed' 
       zIndex='1'
-      h='100vh'
       left='0' 
       right='0' 
     >
@@ -219,9 +219,12 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
         : null
       }
       <Grid
+          position='relative'
           bgColor={scrollPosition > 20 ? 'orange.500' : ''}
           templateColumns='1fr 1fr'
-          py='6'
+          zIndex='0'
+          alignItems='center'
+          py='7'
           px='10vw'
           transition='2 00ms ease-in-out background-color'
         >
@@ -247,6 +250,23 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
           }}
           justifyContent='flex-end'
         >
+            <IconButton 
+              display={{
+                base: 'block',
+                lg: 'none'
+              }}
+              mr='0.25rem'
+              variant='ghost'
+              ref={drawerRef}
+              onClick={openDrawer}
+              aria-label='orders' 
+              icon={<CiShoppingCart size='32' />} 
+              bgColor='transparent' 
+              _hover={{
+                bgColor: 'yellow.300',
+                color: 'orange.500'
+              }}
+              />
           <IconButton
             bgColor='transparent'
             aria-label='menu'
@@ -258,7 +278,19 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
           >
           </IconButton>
         </Flex>
-        <Box 
+        <Box
+          bgColor={{ 
+            base: 'rgba(0, 0, 0, 0.5)',
+            lg: 'transparent' 
+          }}
+          position={{ 
+            base: 'absolute', 
+            lg: 'static'
+          }}
+          h={{
+            base: '100vh',
+            lg: 'auto'
+          }}
           top={{
             base: '0',
             lg: '',
@@ -274,14 +306,6 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
           right={{
             base: '0',
             lg: '',
-          }}
-          bgColor={{ 
-            base: 'rgba(0, 0, 0, 0.5)',
-            lg: 'transparent' 
-          }}
-          position={{ 
-            base: 'absolute', 
-            lg: 'static'
           }}
           display={{
             base: menuVisible ? 'flex' : 'none',
@@ -340,8 +364,8 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
               }}
               size='md'
               position='absolute'
-              mt='1rem'
-              mr='1rem'
+              mt='2rem'
+              mr='2rem'
               top='0'
               right='0'
               bgColor='transparent'

@@ -38,11 +38,21 @@ const Register = ({ setRegistrationSuccess }: Props) => {
   }
 
   return (
-    <Box pt='12vh' minHeight='85vh'>
-      <Heading fontSize='72' textAlign='center' bgClip='text' bgGradient='linear(to-bl, gray.50, yellow.100)'>Create an account</Heading>
+    <Box pt='12vh' minHeight='85vh' mx={{ base: '2.5rem', lg: '0' }}>
+      <Heading fontSize={{ base: '2.5rem', lg: '72' }} textAlign='center' bgClip='text' bgGradient='linear(to-bl, gray.50, yellow.100)'>Create an account</Heading>
       <Flex mt='2rem' justifyContent='center'>
-        <Box onSubmit={submit} py='1rem' px='1.5rem' borderRadius='xl' w='30vw' as='form' bgGradient='linear(to-b, gray.50, gray.200)' color='gray.700'>
-          <Heading textAlign='center'>Registration Form</Heading>
+        <Box 
+          onSubmit={submit} 
+          py='1rem' 
+          px={{ base: '1rem', lg: '1.5rem' }} 
+          borderRadius='xl' 
+          w={{ base: 'auto', lg: '32vw' }} 
+          as='form' 
+          bgGradient='linear(to-b, gray.50, gray.200)' 
+          color='gray.700'
+          mb={{ base: '3rem', lg: '0' }}
+          >
+          <Heading fontSize={{ base: '1rem' , lg: '1.5rem' }} textAlign='center'>Registration Form</Heading>
           <Grid gap='1rem' templateColumns='1fr 1fr' mb='1.5rem'>
             <FormControl>
               <FormLabel>First Name</FormLabel>

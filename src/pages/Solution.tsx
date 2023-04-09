@@ -117,13 +117,13 @@ const Solution = () => {
 
   return (
     <Box pt='12vh' mb='20vh'>
-      <Box mx='10vw'>
+      <Box mx={{ base: '1rem', lg: '10vw' }}>
         <ProductPanelHeader tabs={tabs} handleOnTap={handleOnSelectTab} selectedTab={selectedTab.id} />
         <ProductPanel>
           <Heading color='yellow.400'>{selectedTab.name} Plans</Heading>
           <Text fontSize='xl' fontWeight='semibold'>Choose the plan you need!</Text>
           <Divider borderColor='gray.700' my='1rem' />
-          <Grid mt='1rem' gap='5rem' templateColumns='1fr 1fr 1fr' autoRows='45vh'>
+          <Grid mt='1rem' gap='5rem' templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }} autoRows={{ base: 'auto', lg: '45vh' }}>
             {
               returnPlans(result.data)
             }

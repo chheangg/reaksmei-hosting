@@ -1,4 +1,5 @@
 import { Box, Heading, Text, Button, Image, Grid } from "@chakra-ui/react";
+import { Link as ReachLink } from "react-router-dom";
 import heroBg from '../../assets/hero-bg.png';
 import headerLogo from '../../assets/header-logo.png';
 
@@ -65,6 +66,8 @@ const HeroHeader = () => (
             bgGradient: 'linear(to-l, yellow.300, orange.300)',
             color: 'gray.700'
           }}
+          as={ReachLink}
+          to='/solutions/vps'
         >Browse Now</Button>
       </Box>
       <Box display='flex' alignItems='center' mb='5%' ml={{ base: '0', lg: '20vw'}} height='100%'>
