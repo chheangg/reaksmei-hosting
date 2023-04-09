@@ -9,7 +9,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import App from './App';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: 'https://reaksmei-hosting-production.up.railway.app/',
   cache: new InMemoryCache(),
 })
 
