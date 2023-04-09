@@ -193,7 +193,7 @@ const NavBar = ({ drawerRef, openDrawer, token, setToken, setOrders, registratio
     <Box
       bg='transparent'
       position='fixed' 
-      zIndex='1'
+      zIndex='2'
       left='0' 
       right='0' 
     >

@@ -102,11 +102,22 @@ const Solution = () => {
   if (result.loading) {
     return (
       <Box pt='12vh'>
-        <Box mx='10vw'>
-          <Skeleton height='20px' />
-          <Skeleton height='20px' />
-          <Skeleton height='20px' />
-        </Box>
+      <Box mx={{ base: '1rem', lg: '10vw' }}>
+        <ProductPanelHeader tabs={tabs} handleOnTap={handleOnSelectTab} selectedTab={selectedTab.id} />
+        <ProductPanel>
+          <Heading color='yellow.400'>{selectedTab.name} Plans</Heading>
+          <Text fontSize='xl' fontWeight='semibold'>Choose the plan you need!</Text>
+          <Divider borderColor='gray.700' my='1rem' />
+          <Grid mt='1rem' gap='5rem' templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }} autoRows={{ base: 'auto', lg: '45vh' }}>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </Grid>
+        </ProductPanel>
+      </Box>
       </Box>
     )
   }
